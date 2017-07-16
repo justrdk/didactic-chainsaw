@@ -1,19 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Provider } from 'react-redux'
+import thunkMiddleware from 'redux-thunk';
+import { createStore, applyMiddleware, compose } from 'redux'
+import {persistStore, autoRehydrate} from 'redux-persist'
+import reducers from './reducers'
+import Main from './components/main';
 import './App.css';
+
+const store = createStore(
+  reducers,
+  undefined,
+  compose(
+    applyMiddleware(thunkMiddleware),
+    autoRehydrate()
+  )
+)
+
+persistStore(store);
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <Provider store={store}>
+        <div className="container">
+          <Main/>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      </Provider>
     );
   }
 }
