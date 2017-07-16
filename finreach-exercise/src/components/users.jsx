@@ -10,7 +10,7 @@ export const Users = ({ users, addUser }) => <div>
   <ul className="collection">
     {renderUsers(users)}
   </ul>
-  <a className="waves-effect waves-light btn-large indigo" onClick={() => addUser()}>Add Random User</a>
+  <a className="waves-effect waves-light btn-large green" onClick={() => addUser()}>Add Random User</a>
 </div>
 
 Users.displayName = 'Users';
